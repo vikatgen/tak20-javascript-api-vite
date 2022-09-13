@@ -18,7 +18,6 @@ try {
 try {
 	API.get('/statistics', { params: { country: 'estonia' }}).then((response) => {
 		const result = response.data.response[0]
-		console.log(result)
 		resultWrapper.innerHTML = `
 			<p>on day ${result.day}</p>
 		`
