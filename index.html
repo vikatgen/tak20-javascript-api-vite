@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-      <h1>Teretulemast Javascript API kursusele</h1>
-      <p>Powered by Vite</p>
-      <div>
-        <select name="countries" id="countries"></select>
-        <div class="result">
-        </div>
-      </div>
-    </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/glacial-indifference" type="text/css"/> 
+	<title>Vite App</title>
+</head>
+<body>
+	<div id="app">
+		<div class="container">
+			<div class="heading-container">
+				<h1>COVID19 Statistika</h1>
+				<p>Bundled by Vite</p>
+			</div>
+			<div class="form-container">
+				<label for="countries">Vali riik</label>
+				<select name="countries" id="countries"></select>
+			</div>
+			<div class="empty-result-state">
+				<p>Hetkel info puudub. Statistika nägemiseks vali riik.</p>
+			</div>
+			<div class="result">
+				<span class="result-date"></span>
+				<div class="space-between">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="module" src="/main.js"></script>
+</body>
 </html>

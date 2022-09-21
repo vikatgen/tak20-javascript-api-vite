@@ -2,6 +2,13 @@ import API from './api/api'
 
 const countrySelectElement = document.querySelector('#countries');
 const resultWrapper = document.querySelector('.result');
+const emptyStateWrapper = document.querySelector('.empty-result-state');
+
+countrySelectElement.addEventListener('input', async (event) => {
+	await fetchCountryStatistics(event.target.value);
+})
+
+countrySelectElement.add(new Option('', null, true))
 
 // Fetch all countries which will be appended to select element
 try {
@@ -11,14 +18,21 @@ try {
 		})
 	});
 } catch (error) {
-	throw new Error(error.message)
+	throw new Error(error.response.message)
 }
 
 // Get data for specific country
-try {
-	API.get('/statistics', { params: { country: 'estonia' }}).then((response) => {
-		const result = response.data.response[0]
-		resultWrapper.innerHTML = `
+
+const fetchCountryStatistics = async (country) => {
+	await API.get('/statistics', { params: { country: country }}).then((response) => {
+		const result = response.data?.response[0]
+
+		if (!result) emptyStateWrapper.classList.remove('hidden');
+
+		if (result) {
+			emptyStateWrapper.classList.add('hidden')
+
+			resultWrapper.innerHTML = `
 			<p>
 				<b>Andmete kuupäev: </b>${result.day}
 			</p>
@@ -28,12 +42,11 @@ try {
 			<p>
 				<b>Populatsioon: </b> ${result.population}
 			</p>
-			<p>${result.cases.new} uut juhtumit.</p>
-			<p>${result.cases.active} aktiivset juhtumit kokku.</p>
-			<p>${result.cases.critical} kriitilist juhtumit hetkel.</p>
-			<p>${result.cases.recovered} taastunud juhtumit läbi ajaloo.</p>
-		`
+			<p>${result.cases.new || 0 } uut juhtumit.</p>
+			<p>${result.cases.active || 0 } aktiivset juhtumit kokku.</p>
+			<p>${result.cases.critical || 0 } kriitilist juhtumit hetkel.</p>
+			<p>${result.cases.recovered || 0 } taastunud juhtumit läbi ajaloo.</p>
+		`	
+		}
 	})
-} catch (error) {
-	throw new Error(error.message);
 }
