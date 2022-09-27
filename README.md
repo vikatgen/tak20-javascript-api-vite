@@ -9,3 +9,5 @@
     - Put your own credentials to env file for API connections. (RAPIDAPI - COVID19)
 - npm run dev
 - Enjoy!
+
+### Showing TAK22 how to git.
