@@ -26,8 +26,12 @@ try {
 const fetchCountryStatistics = async (country) => {
 	await API.get('/statistics', { params: { country: country }}).then((response) => {
 		const result = response.data?.response[0]
+		console.log(result)
 
-		if (!result) emptyStateWrapper.classList.remove('hidden');
+		if (!result) {
+			emptyStateWrapper.classList.remove('hidden');
+			resultWrapper.innerHTML = ''
+		};
 
 		if (result) {
 			emptyStateWrapper.classList.add('hidden')
